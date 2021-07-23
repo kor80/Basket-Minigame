@@ -13,19 +13,25 @@ public class Ball : MonoBehaviour
     private Rigidbody ballRb;
     private Vector3 vectorForce;
 
+    // STATES
+    private bool isMoving;
+
     private void Start() 
     {
         ballRb = GetComponent<Rigidbody>();
+        isMoving = false;
     }
 
     private void Update() 
     {
+        #region Testing
         if(Input.GetKeyDown(KeyCode.F))
         {
             transform.position = new Vector3(-8, 0, 0);
             ballRb.useGravity = false;
             ballRb.velocity = Vector3.zero;
         }    
+        #endregion
     }
 
     private void OnMouseDrag() 
@@ -40,23 +46,30 @@ public class Ball : MonoBehaviour
 
     private void ReleaseBall()
     { 
-        TrajectoryManager.Instance.ClearTrajectoryoints();
-        ballRb.AddForce(vectorForce, ForceMode.Impulse);    
-        ballRb.useGravity = true;
+        if(!isMoving)
+        {
+            TrajectoryManager.Instance.ClearTrajectoryPoints();
+            ballRb.AddForce(vectorForce, ForceMode.Impulse);    
+            ballRb.useGravity = true;
+            isMoving = true;
+        }
     }
 
     private void DragBall()
     {
-        Vector3 dragPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        dragPoint.z = 0;
+        if(!isMoving)
+        {
+            Vector3 dragPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            dragPoint.z = 0;
 
-        Vector3 dragVector = dragPoint - transform.position;
+            Vector3 dragVector = dragPoint - transform.position;
 
-        float clampedMagnitude = Mathf.Clamp(dragVector.magnitude, minForce, maxForce);
+            float clampedMagnitude = Mathf.Clamp(dragVector.magnitude, minForce, maxForce);
 
-        vectorForce = -1 * dragVector.normalized * clampedMagnitude * multiplier; 
+            vectorForce = -1 * dragVector.normalized * clampedMagnitude * multiplier; 
 
-        //GenerateTrajectory(distanceBetTrajectoryPoints, numberOfTrajectoryPoints);  
-        TrajectoryManager.Instance.GenerateTrajectory(clampedMagnitude, maxForce, vectorForce);
+            //GenerateTrajectory(distanceBetTrajectoryPoints, numberOfTrajectoryPoints);  
+            TrajectoryManager.Instance.GenerateTrajectory(clampedMagnitude, maxForce, vectorForce);
+        }
     }
 }

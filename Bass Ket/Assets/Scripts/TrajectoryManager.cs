@@ -18,7 +18,7 @@ public class TrajectoryManager : MonoBehaviour
 
     public void GenerateTrajectory(float vectorMagnitude, float maxForce, Vector3 vectorForce)
     {
-        ClearTrajectoryoints();
+        ClearTrajectoryPoints();
 
         // Calculating number of cycles based on applied force
         float cycles = (numOfTrajectoryPoints * distBetTrajectoryPoints) / (maxForce / vectorMagnitude);
@@ -28,7 +28,7 @@ public class TrajectoryManager : MonoBehaviour
         float yVelocity = vectorForce.y;
 
         // Note that I used the nomenclature "distance between points" and I assign that variable to a time in the equation
-        // I do that because if I analyze the positions in greater time values it is poportional to a distance increasing.
+        // I do that because if I analyze the positions in greater time values it is proportional to a distance increasing.
         int pointNumber = 0;
         for(float t=distBetTrajectoryPoints; t<=cycles; t+=distBetTrajectoryPoints)
         {
@@ -43,7 +43,7 @@ public class TrajectoryManager : MonoBehaviour
         }  
     }
 
-    public void ClearTrajectoryoints()
+    public void ClearTrajectoryPoints()
     {
         if(trajectoryPoints.Count > 0)
             foreach(GameObject point in trajectoryPoints)
