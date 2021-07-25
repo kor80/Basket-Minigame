@@ -27,9 +27,10 @@ public class Ball : MonoBehaviour
         #region Testing
         if(Input.GetKeyDown(KeyCode.F))
         {
-            transform.position = new Vector3(-8, 0, 0);
+            transform.position = new Vector3(0, 0, 0);
             ballRb.useGravity = false;
             ballRb.velocity = Vector3.zero;
+            isMoving = false;
         }    
         #endregion
     }
