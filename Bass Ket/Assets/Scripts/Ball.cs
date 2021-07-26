@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     // PARAMETERS
-    private float maxForce = 2.5f;
+    private float maxForce = 4f;
     private float minForce = 0f;
     private float multiplier = 5f;
 
@@ -15,6 +15,13 @@ public class Ball : MonoBehaviour
 
     // STATES
     private bool isMoving;
+
+    public static Ball Instance {get; private set;}
+
+    private void Awake() 
+    {
+        Instance = this;
+    }
 
     private void Start() 
     {
@@ -51,8 +58,7 @@ public class Ball : MonoBehaviour
         {
             TrajectoryManager.Instance.ClearTrajectoryPoints();
             ballRb.AddForce(vectorForce, ForceMode.Impulse);    
-            ballRb.useGravity = true;
-            isMoving = true;
+            SwitchGravity(true);
         }
     }
 
@@ -72,5 +78,12 @@ public class Ball : MonoBehaviour
             //GenerateTrajectory(distanceBetTrajectoryPoints, numberOfTrajectoryPoints);  
             TrajectoryManager.Instance.GenerateTrajectory(clampedMagnitude, maxForce, vectorForce);
         }
+    }
+
+    public void SwitchGravity(bool value)
+    {
+        ballRb.useGravity = value;
+        isMoving = value;
+        ballRb.velocity = Vector3.zero;
     }
 }
