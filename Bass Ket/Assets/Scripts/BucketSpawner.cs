@@ -7,16 +7,15 @@ public class BucketSpawner : MonoBehaviour
     [SerializeField] private GameObject bucketPrefab;
     [SerializeField] private Vector3 minDistToBall;
     private GameObject bucketObject;
-    public static BucketSpawner Instance {get; private set;}
 
-    private void Awake() 
+    private void Start() 
     {
-        Instance = this;    
+        Bucket.scoreDelegate += SpawnBucket;
         bucketObject = Instantiate(
                                     bucketPrefab, 
                                     GenerateRandomVector(0f, spawnOffset, 0f, topBound), 
                                     Quaternion.Euler(-90f, 0f, 0f)
-                                  );
+                                  );    
     }
 
     public void SpawnBucket()
