@@ -13,11 +13,8 @@ public class SceneLoader : MonoBehaviour
         if(SceneLoader.Instance != null)
             Destroy(this.gameObject);
 
-        Instance = this;    
-    }
-
-    public void LoadGameScene()
-    {   SceneManager.LoadScene(1);
+        Instance = this;
+        DontDestroyOnLoad(this.gameObject);    
     }
 
     public void LoadMainMenu()
@@ -25,7 +22,11 @@ public class SceneLoader : MonoBehaviour
     }
 
     public void LoadSettingsMenu()
-    {   SceneManager.LoadScene("SettingsMenu");
+    {   SceneManager.LoadScene(1);
+    }
+
+    public void LoadGameScene()
+    {   SceneManager.LoadScene(2);
     }
 
     public void QuitGame()
