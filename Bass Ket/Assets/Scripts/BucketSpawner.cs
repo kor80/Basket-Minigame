@@ -10,7 +10,7 @@ public class BucketSpawner : MonoBehaviour
 
     private void Start() 
     {
-        Bucket.scoreDelegate += SpawnBucket;
+        Bucket.scoreDelegate += SpawnBucket; 
         bucketObject = Instantiate(
                                     bucketPrefab, 
                                     GenerateRandomVector(0f, spawnOffset, 0f, topBound), 
@@ -46,5 +46,9 @@ public class BucketSpawner : MonoBehaviour
                             Random.Range(minY, maxY),
                             0f
                           );
+    }
+
+    public void ActivateThis()
+    {   this.gameObject.SetActive(true);
     }
 }

@@ -86,4 +86,8 @@ public class Ball : MonoBehaviour
         isMoving = value;
         ballRb.velocity = Vector3.zero;
     }
+
+    public void ActivateThis()
+    {   this.gameObject.SetActive(true);
+    }
 }
