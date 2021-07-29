@@ -20,7 +20,7 @@ public class SceneLoader : MonoBehaviour
     public void LoadMainMenu()
     {   
         SceneManager.LoadScene(0);
-        GameManager.Instance.StopPlaying();
+        GameManager.Instance.StopPlayingAndInitializeScore();
     }
 
     public void LoadSettingsMenu()
@@ -29,8 +29,14 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadGameScene()
     {   
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
         GameManager.Instance.StartPlaying();
+    }
+
+    public void LoadGameOver()
+    {
+        SceneManager.LoadScene(2);
+        GameManager.Instance.StopPlaying();
     }
 
     public void QuitGame()

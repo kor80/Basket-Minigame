@@ -23,9 +23,7 @@ public class ButtonHandler : MonoBehaviour
             Debug.Log(1);
         }
         else
-        {
             foreach(Fade goFade in FindObjectsOfType<Fade>())
                 goFade.StartFading();
-        }
     }
 }
