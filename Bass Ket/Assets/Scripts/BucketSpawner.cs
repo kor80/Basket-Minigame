@@ -13,7 +13,7 @@ public class BucketSpawner : MonoBehaviour
         Bucket.scoreDelegate += SpawnBucket; 
         bucketObject = Instantiate(
                                     bucketPrefab, 
-                                    GenerateRandomVector(0f, spawnOffset, 0f, topBound), 
+                                    GenerateRandomVector(Ball.Instance.transform.position.x + minDistToBall.x, spawnOffset, 0f, topBound), 
                                     Quaternion.Euler(-90f, 0f, 0f)
                                   );    
     }
@@ -29,13 +29,13 @@ public class BucketSpawner : MonoBehaviour
 
     private void SpawnBucketToLeft(float ballXDistance, float ballYDistance)
     {
-        bucketObject.transform.position = GenerateRandomVector(ballXDistance - spawnOffset, ballXDistance, ballYDistance, topBound);
+        bucketObject.transform.position = GenerateRandomVector(ballXDistance - spawnOffset, ballXDistance, ballYDistance*1.2f, topBound);
         bucketObject.transform.rotation = Quaternion.Euler(-90, 180f, 0f);
     }
 
     private void SpawnBucketToRight(float ballXDistance, float ballYDistance)
     {
-        bucketObject.transform.position = GenerateRandomVector(ballXDistance, ballXDistance + spawnOffset, ballYDistance, topBound);
+        bucketObject.transform.position = GenerateRandomVector(ballXDistance, ballXDistance + spawnOffset, ballYDistance*1.2f, topBound);
         bucketObject.transform.rotation = Quaternion.Euler(-90, 0f, 0f);
     }
 

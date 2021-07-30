@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class TrajectoryManager : MonoBehaviour
 {
-    private float distBetTrajectoryPoints = 0.2f;
-    private int numOfTrajectoryPoints = 10;
+    private float distBetTrajectoryPoints = 0.1f;
+    private int numOfTrajectoryPoints = 8;
     private List<GameObject> trajectoryPoints;
     [SerializeField] private GameObject ball;
     [SerializeField] private GameObject pointPrefab;

@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
     // PARAMETERS
-    private float maxForce = 4f;
-    private float minForce = 0f;
-    private float multiplier = 5f;
+    private float maxForce = 6f;
+    private float minForce = 0.5f;
+    private float multiplier = 7f;
 
     // COMPONENTS
     private Rigidbody ballRb;
@@ -54,7 +52,7 @@ public class Ball : MonoBehaviour
 
     private void ReleaseBall()
     { 
-        if(!isMoving)
+        if(!isMoving && vectorForce != Vector3.zero)
         {
             TrajectoryManager.Instance.ClearTrajectoryPoints();
             ballRb.AddForce(vectorForce, ForceMode.Impulse);    
@@ -73,9 +71,8 @@ public class Ball : MonoBehaviour
 
             float clampedMagnitude = Mathf.Clamp(dragVector.magnitude, minForce, maxForce);
 
-            vectorForce = -1 * dragVector.normalized * clampedMagnitude * multiplier; 
-
-            //GenerateTrajectory(distanceBetTrajectoryPoints, numberOfTrajectoryPoints);  
+            vectorForce = (clampedMagnitude > minForce) ? (-1 * dragVector.normalized * clampedMagnitude * multiplier) : Vector3.zero; 
+ 
             TrajectoryManager.Instance.GenerateTrajectory(clampedMagnitude, maxForce, vectorForce);
         }
     }

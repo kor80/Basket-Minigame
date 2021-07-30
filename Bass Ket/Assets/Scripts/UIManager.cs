@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        if(GameManager.Instance.UserNickname != null)
+        if(GameManager.Instance != null && GameManager.Instance.UserNickname != null)
             playerText.text = GameManager.Instance.UserNickname + ":";
 
         RefreshScore();
@@ -17,11 +17,16 @@ public class UIManager : MonoBehaviour
 
     public void IncreaseScore()
     {
-        GameManager.Instance.IncreaseScore();
-        RefreshScore();
+        if(GameManager.Instance != null)
+        {
+            GameManager.Instance.IncreaseScore();
+            RefreshScore();
+        }
     }
 
     public void RefreshScore()
-    {   scoreTxt.text = GameManager.Instance.Score.ToString();
+    {   
+        if(GameManager.Instance != null)
+            scoreTxt.text = GameManager.Instance.Score.ToString();
     }
 }
