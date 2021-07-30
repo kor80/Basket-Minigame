@@ -15,7 +15,8 @@ public class SettingsMenuUI : MonoBehaviour
             else
                 DisableResumeBtn();
 
-            DataSaver.Instance.LoadSettings(volumeSlider);
+            if(DataSaver.Instance != null)
+                volumeSlider.value = DataSaver.Instance.LoadSettings().volume;
         }    
     }
 

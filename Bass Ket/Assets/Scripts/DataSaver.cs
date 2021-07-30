@@ -56,28 +56,28 @@ public class DataSaver : MonoBehaviour
         File.WriteAllText(Application.persistentDataPath + "/bestPlayerData.json", json);
     }
 
-    public void LoadSettings(AudioSource audioSource)
-    {
-        string path = Application.persistentDataPath + "/settings.json";
-        if(File.Exists(path))
-        {
-            string json = File.ReadAllText(path);
-            SettingsValues playerSettings = JsonUtility.FromJson<SettingsValues>(json);
-            audioSource.volume = playerSettings.volume;
-            Debug.Log("Data Loaded!");
-        }
-    }
 
-    public void LoadSettings(Slider slider)
+
+    public SettingsValues LoadSettings()
     {
         string path = Application.persistentDataPath + "/settings.json";
         if(File.Exists(path))
         {
             string json = File.ReadAllText(path);
             SettingsValues playerSettings = JsonUtility.FromJson<SettingsValues>(json);
-            slider.value = playerSettings.volume;
-            Debug.Log("Data Loaded!");
+
+            if(playerSettings != null)
+            {
+                Debug.Log("Data Loaded!");
+                return playerSettings;
+            }
+            else
+            {
+                Debug.Log("Cannot find player settings");
+                return null;
+            }
         }
+        return null;
     }
 
     public BestPlayer LoadBestPlayer()

@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour
 
     // COMPONENTS
     private Rigidbody ballRb;
+    private AudioSource audioSource;
     private Vector3 vectorForce;
 
     // STATES
@@ -24,6 +25,7 @@ public class Ball : MonoBehaviour
     private void Start() 
     {
         ballRb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
         isMoving = false;
     }
 
@@ -54,6 +56,7 @@ public class Ball : MonoBehaviour
     { 
         if(!isMoving && vectorForce != Vector3.zero)
         {
+            audioSource.Play();
             TrajectoryManager.Instance.ClearTrajectoryPoints();
             ballRb.AddForce(vectorForce, ForceMode.Impulse);    
             SwitchGravity(true);

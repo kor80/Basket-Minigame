@@ -18,6 +18,9 @@ public class GameOverUI : MonoBehaviour
             FillTopSide();
             FillUserData();
         }
+
+        if(AudioController.Instance != null)
+            AudioController.Instance.audioSource.Stop();
     }
 
     private void FillTopSide()
