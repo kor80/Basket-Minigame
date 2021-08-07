@@ -4,10 +4,12 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Text playerText;
-    [SerializeField] private Text scoreTxt;
+    private Text scoreTxt;
 
     void Start()
     {
+        scoreTxt = gameObject.transform.Find("Score").transform.Find("Score").GetComponent<Text>();
+
         if(GameManager.Instance != null && GameManager.Instance.UserNickname != null)
             playerText.text = GameManager.Instance.UserNickname + ":";
 
@@ -28,5 +30,10 @@ public class UIManager : MonoBehaviour
     {   
         if(GameManager.Instance != null)
             scoreTxt.text = GameManager.Instance.Score.ToString();
+    }
+
+    void OnDestroy() 
+    {
+        Bucket.scoreDelegate -= IncreaseScore;    
     }
 }

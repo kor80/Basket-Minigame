@@ -20,6 +20,9 @@ public class BucketSpawner : MonoBehaviour
 
     public void SpawnBucket()
     {
+        if(bucketObject == null)
+            return;
+            
         Vector3 ballPos = Ball.Instance.transform.position;
         if(ballPos.x >= 0)
             SpawnBucketToLeft(ballPos.x - minDistToBall.x, ballPos.y + minDistToBall.y);

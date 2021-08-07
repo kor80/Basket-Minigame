@@ -1,7 +1,9 @@
 using UnityEngine;
+using Cinemachine;
 
 public class Bucket : MonoBehaviour
 {
+    private CinemachineVirtualCamera cmVCam;
     [SerializeField] private float cameraYOffset;
     private AudioSource audioSource;
     public delegate void Score();
@@ -10,6 +12,7 @@ public class Bucket : MonoBehaviour
     private void Start() 
     {
         audioSource = GetComponent<AudioSource>();    
+        cmVCam = FindObjectOfType<CinemachineVirtualCamera>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -18,7 +21,7 @@ public class Bucket : MonoBehaviour
         {
             audioSource.Play();
             Ball.Instance.SwitchGravity(false);
-            Camera.main.transform.position = new Vector3(
+            cmVCam.transform.position = new Vector3(
                                                             Camera.main.transform.position.x, 
                                                             Ball.Instance.transform.position.y - cameraYOffset, 
                                                             Camera.main.transform.position.z
