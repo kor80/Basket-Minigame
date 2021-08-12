@@ -3,7 +3,7 @@ using UnityEngine;
 public class Fade : MonoBehaviour
 {
     [SerializeField] public bool isMoving = false; 
-    [SerializeField] private float destination = Screen.width * 0.5f;
+    [SerializeField] private float destination = Screen.width / 2f;
     private float speed = 600f;
 
     void Update()
@@ -24,6 +24,6 @@ public class Fade : MonoBehaviour
     }
 
     public void SetDestinationInScreenMid()
-    {   destination = Screen.width * 0.5f;
+    {   destination = Screen.width / 2f;
     }
 }

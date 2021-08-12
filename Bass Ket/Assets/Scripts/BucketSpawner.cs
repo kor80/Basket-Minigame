@@ -11,11 +11,12 @@ public class BucketSpawner : MonoBehaviour
     private void Start() 
     {
         Bucket.scoreDelegate += SpawnBucket; 
+        Instantiate(GameManager.Instance.ball, Vector3.zero, Quaternion.identity);  
         bucketObject = Instantiate(
                                     bucketPrefab, 
                                     GenerateRandomVector(Ball.Instance.transform.position.x + minDistToBall.x, spawnOffset, 0f, topBound), 
                                     Quaternion.Euler(-90f, 0f, 0f)
-                                  );    
+                                  );  
     }
 
     public void SpawnBucket()

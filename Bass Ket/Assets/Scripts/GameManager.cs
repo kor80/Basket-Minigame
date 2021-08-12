@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
     public string UserNickname{get; private set;}
     public int Score{get; private set;}
     public bool IsPlaying {get; private set;}
+    public Ball ball {get; private set;}
     public static GameManager Instance {get; private set;}
 
     private void Awake() 
@@ -51,5 +52,9 @@ public class GameManager : MonoBehaviour
 
     public void StopPlaying()
     {   IsPlaying = false;
+    }
+
+    public void SetBallInstance(Ball ballInstance)
+    {   ball = ballInstance;
     }
 }
