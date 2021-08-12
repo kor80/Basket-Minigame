@@ -3,29 +3,26 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     // PARAMETERS
-    private float maxForce = 6f;
-    private float minForce = 0.5f;
-    private float multiplier = 7f;
+    protected float maxForce = 6f;
+    protected float minForce = 0.5f;
+    protected float multiplier = 7f;
 
     // COMPONENTS
-    private Rigidbody ballRb;
-    private AudioSource audioSource;
+    protected Rigidbody ballRb;
+    protected AudioSource audioSource;
     private Vector3 vectorForce;
 
     // STATES
     private bool isMoving;
 
-    public static Ball Instance {get; private set;}
+    public static Ball Instance {get; protected set;}
 
-    private void Awake() 
+    void Awake() 
     {
         Instance = this;
-    }
 
-    private void Start() 
-    {
         ballRb = GetComponent<Rigidbody>();
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();   
         isMoving = false;
     }
 
@@ -56,7 +53,9 @@ public class Ball : MonoBehaviour
     { 
         if(!isMoving && vectorForce != Vector3.zero)
         {
-            audioSource.Play();
+            if(audioSource)
+                audioSource.Play();
+            
             TrajectoryManager.Instance.ClearTrajectoryPoints();
             ballRb.AddForce(vectorForce, ForceMode.Impulse);    
             SwitchGravity(true);

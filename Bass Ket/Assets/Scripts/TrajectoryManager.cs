@@ -6,7 +6,7 @@ public class TrajectoryManager : MonoBehaviour
     private float distBetTrajectoryPoints = 0.1f;
     private int numOfTrajectoryPoints = 8;
     private List<GameObject> trajectoryPoints;
-    [SerializeField] private GameObject ball;
+    private GameObject ball;
     [SerializeField] private GameObject pointPrefab;
     public static TrajectoryManager Instance { get; private set; }
 
@@ -65,5 +65,54 @@ public class TrajectoryManager : MonoBehaviour
             trajectoryPoints.Add(point);
             point.SetActive(false);
         }
+    }
+
+    private void RemovePointsFromList(int numOfPoints)
+    {
+        if(trajectoryPoints.Count <= numOfPoints)
+        {
+            trajectoryPoints.Clear();
+            return;
+        }
+
+        int newSize = trajectoryPoints.Count - numOfPoints;
+        for(int i = trajectoryPoints.Count-1; i >= newSize; i--)
+        {
+            Destroy(trajectoryPoints[i]);
+            trajectoryPoints.RemoveAt(i);
+        }
+
+        numOfTrajectoryPoints = newSize;
+    }
+
+    private void AddPointsToList(int numOfPoints)
+    {
+
+        for(int i = 0; i < numOfPoints; i++)
+        {
+            var point = Instantiate(pointPrefab, Vector3.zero, Quaternion.identity);
+            trajectoryPoints.Add(point);
+            point.SetActive(false);
+        }
+            
+
+        numOfTrajectoryPoints += numOfPoints;
+    }
+
+    public void SetTrajectoryParams(float newDistBetTrajectoryPoints, int newNumOfTrajectoryPoints)
+    {
+        if(newNumOfTrajectoryPoints > numOfTrajectoryPoints)
+            AddPointsToList(newNumOfTrajectoryPoints - numOfTrajectoryPoints);
+        
+        if(newNumOfTrajectoryPoints < numOfTrajectoryPoints)
+            RemovePointsFromList(numOfTrajectoryPoints - newNumOfTrajectoryPoints);
+
+        distBetTrajectoryPoints = newDistBetTrajectoryPoints;
+
+        Debug.Log(trajectoryPoints.Count);
+    }
+
+    public void SetBallInstance(GameObject ballInstance)
+    {   ball = ballInstance;
     }
 }
