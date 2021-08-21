@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    // ENCAPSULATION
     public string UserNickname{get; private set;}
     public int Score{get; private set;}
     public bool IsPlaying {get; private set;}

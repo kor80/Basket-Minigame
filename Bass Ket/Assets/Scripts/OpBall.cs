@@ -1,5 +1,7 @@
+// INHERITANCE
 public class OpBall : Ball
 {
+    // POLIMORPHYSM
     void Start()
     {   
         TrajectoryManager.Instance.SetBallInstance(this.gameObject);
