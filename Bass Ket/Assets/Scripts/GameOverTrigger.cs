@@ -1,8 +1,10 @@
 using UnityEngine;
+using System.Collections;
 
 public class GameOverTrigger : MonoBehaviour
 {
     private AudioSource audioSource;
+    [SerializeField] private ParticleSystem gameOverParticles;
 
     private void Start() 
     {
@@ -12,11 +14,16 @@ public class GameOverTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other) 
     {
         if(other.CompareTag("Ball"))
-        {
-            audioSource.Play();
-            
-            if(SceneLoader.Instance != null)
-                SceneLoader.Instance.LoadGameOver();    
-        }
+            StartCoroutine(WaitAndLoadGameOver(1f));
+    }
+
+    private IEnumerator WaitAndLoadGameOver(float timeToWait)
+    {
+        audioSource.Play();
+        Instantiate(gameOverParticles, Camera.main.transform.position, Quaternion.identity);
+
+        yield return new WaitForSeconds(timeToWait);
+
+        SceneLoader.Instance.LoadGameOver();  
     }
 }

@@ -108,8 +108,6 @@ public class TrajectoryManager : MonoBehaviour
             RemovePointsFromList(numOfTrajectoryPoints - newNumOfTrajectoryPoints);
 
         distBetTrajectoryPoints = newDistBetTrajectoryPoints;
-
-        Debug.Log(trajectoryPoints.Count);
     }
 
     public void SetBallInstance(GameObject ballInstance)

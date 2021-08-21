@@ -1801,7 +1801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMoving: 0
-  destination: 2000
+  goOffScreen: 1
 --- !u!114 &1276831517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2418,7 +2418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMoving: 0
-  destination: 542
+  goOffScreen: 0
 --- !u!1 &2015175632
 GameObject:
   m_ObjectHideFlags: 0
@@ -2590,7 +2590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMoving: 0
-  destination: 542
+  goOffScreen: 0
 --- !u!114 &2068721765
 MonoBehaviour:
   m_ObjectHideFlags: 0

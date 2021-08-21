@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraYOffset: 0
+  scoreParticles: {fileID: 2149129567239053643, guid: 9dcd16f702a5e52469ceef0b8f73f746, type: 3}
 --- !u!82 &6949246362781482189
 AudioSource:
   m_ObjectHideFlags: 0
